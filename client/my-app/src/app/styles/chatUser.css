@@ -1,0 +1,90 @@
+/* CSS for Chat Interface */
+.chat {
+    display: flex;
+}
+
+#chatcontainer {
+    flex: 1; /* Đảm bảo phần nội dung chính (left-chat) mở rộng theo chiều ngang */
+    padding: 20px;
+}
+
+.left-chat h2 {
+    height: 60px;
+    border-radius: 10px;
+    background-color: rgb(22, 159, 232);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.chat-container {
+    max-height: 300px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.left-chat {
+    background-color: #f2f2f2; /* Màu nền cho khung chat */
+    border-radius: 10px;
+    padding: 20px;
+    max-width: 500px; /* Giới hạn chiều rộng của khung chat */
+}
+
+.left-chat h2 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.chat-content {
+    overflow-y: auto; /* Cho phép cuộn nội dung khi vượt quá kích thước */
+    max-height: 400px; /* Giới hạn chiều cao của khung chat */
+}
+
+.recei-container,
+.send-container {
+    margin-bottom: 10px; /* Khoảng cách giữa các tin nhắn */
+}
+
+.mess-recei {
+    padding: 10px;
+    border-radius: 5px;
+    max-width: max-content; /* Giới hạn chiều rộng của tin nhắn */
+    background-color: #e19f9f; /* Màu nền cho tin nhắn nhận */
+    color: black; /* Màu chữ cho tin nhắn nhận */
+}
+
+.mess-send {
+    padding: 10px;
+    border-radius: 5px;
+    max-width: max-content; /* Giới hạn chiều rộng của tin nhắn */
+    background-color: rgb(86, 174, 145); /* Màu nền cho tin nhắn gửi */
+    color: white; /* Màu chữ cho tin nhắn gửi */
+}
+
+.send-container {
+    align-self: flex-end; /* Đẩy tin nhắn gửi sang bên phải */
+}
+
+.input-send {
+    display: flex;
+    margin-top: 20px;
+}
+
+.input-send input {
+    flex: 1; /* Ô input mở rộng theo chiều ngang */
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.input-send button {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-left: 10px;
+}

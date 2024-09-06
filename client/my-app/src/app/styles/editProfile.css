@@ -1,0 +1,7 @@
+.change-avt{
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    align-items: center;
+    padding-top: 100px;
+}

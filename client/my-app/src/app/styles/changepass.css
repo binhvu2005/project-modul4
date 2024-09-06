@@ -1,0 +1,87 @@
+body {
+  font-family: Arial, sans-serif;
+  background-image: url("https://kidskintha.com/wp-content/uploads/2020/07/Online-Test-Makers.jpg");
+  background-repeat: no-repeat;
+  background-size: 100%;
+}
+
+.a1 {
+  text-decoration: none;
+}
+
+.btnn {
+  border: none;
+  border-radius: 3px;
+  background-color: gold;
+}
+
+.container {
+  max-width: 400px;
+  margin: 200px auto;
+  padding: 20px;
+  border-radius: 10px;
+  color: black;
+  border: 4px solid rgba(255, 255, 255, 0.447);
+}
+
+h2 {
+  text-align: center;
+  background-color: gold;
+  padding: 10px;
+  border-radius: 10px;
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+label {
+  display: block;
+  margin-bottom: 5px;
+}
+
+input[type="password"] {
+  width: 100% !important;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  outline: none;
+  font-size: 16px;
+}
+
+#formDoiMatKhau {
+  width: 94%;
+}
+
+.thong-bao-loi {
+  color: red;
+  margin-bottom: 10px;
+}
+
+button[type="submit"] {
+  width: 106%;
+  background-color: gold;
+  color: black;
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+button[type="submit"]:hover {
+  background-color: goldenrod;
+}
+
+#doDaiMatKhau,
+#trong-1,
+#trong-2,
+#trong-3,
+#trong-4 {
+  display: none;
+  position: relative;
+  top: -20px;
+  font-size: 12px;
+  color: red;
+}

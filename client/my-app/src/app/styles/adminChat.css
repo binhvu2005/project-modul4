@@ -1,0 +1,138 @@
+/* CSS for Chat Interface */
+.all-content {
+    display: flex;
+    flex-direction: row;
+    height: 100vh;
+    background-color: rgb(212, 210, 210);
+    height: 700px;
+
+}
+
+a {
+    text-decoration: none;
+}
+
+.mess-list {
+    width: 40%;
+    border-right: 1px solid #ccc;
+    overflow-y: auto;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    background-color: rgb(232, 228, 228);
+
+}
+
+.mess-item {
+    border: 1px solid rgb(172, 172, 172);
+    display: flex;
+    width: 200px;
+    align-items: center;
+    border-radius: 10px;
+
+}
+
+.mess-item:hover {
+    background-color: #ccc;
+}
+
+.mess-item img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin-right: 10px;
+}
+
+.mess-item p {
+    color: black;
+}
+
+.container-chat {
+    flex: 3;
+    display: flex;
+    flex-direction: column;
+    /* Đặt định dạng cột cho container-chat */
+    gap: 20px;
+    max-height: 100% !important;
+    overflow-y: auto;
+
+
+}
+
+.mess-admin {
+    width: max-content;
+    align-self: flex-start;
+}
+
+.mess-user {
+    width: max-content;
+    align-self: flex-end;
+}
+
+.mess-content-send {
+    background-color: #DCF8C6;
+    padding: 10px;
+    border-radius: 10px;
+}
+
+.mess-content-reccei {
+    background-color: rgb(239, 207, 207);
+    padding: 10px;
+    border-radius: 10px;
+}
+
+.input-send {
+    display: flex;
+    justify-content: flex-end;
+    /* Chuyển nút gửi về phía cuối cùng bên phải */
+    align-items: center;
+    padding: 10px;
+    border-top: 1px solid #ccc;
+    /* Loại bỏ position: fixed */
+    /* position: fixed; */
+    /* margin-top: -30px; */
+    bottom: 0;
+    right: 0;
+    width: 100%;
+    background-color: white;
+    position: fixed;
+    z-index: 1000 !important;
+}
+
+
+.input-send input {
+    width: 750px;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-right: 10px;
+}
+
+.input-send button {
+    padding: 8px 16px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.input-send button:hover {
+    background-color: #45a049;
+}
+
+#submitMess {
+    align-self: flex-end;
+}
+
+.quaylai {
+    border: none;
+    bottom: 0;
+    left: 10px;
+    position: fixed;
+    z-index: 1000 !important;
+    width: 100px;
+    height: 50px;
+    background-color: bisque;
+}
