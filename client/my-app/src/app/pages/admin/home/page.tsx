@@ -34,18 +34,17 @@ export default function AdminPage() {
       });
 
     // Fetch exams from external API
-    axios.get('http://localhost:5000/subjectList')
+    axios.get('http://localhost:5000/examList')
       .then((response) => {
         const examData: Exam[] = [];
-        response.data.forEach((subject: { subject: string; examList: any[] }) => {
-          subject.examList.forEach((exam: { name: string; level: string }) => {
+        response.data.forEach((exam: { name: string; level: string }) => {
             examData.push({
-              subject: subject.subject,
+              subject: 'Toán', // Replace with actual subject name
               name: exam.name,
               level: exam.level,
             });
           });
-        });
+    
         setExams(examData);
       })
       .catch((error) => {

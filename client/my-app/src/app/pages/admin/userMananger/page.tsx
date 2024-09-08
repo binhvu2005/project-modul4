@@ -168,7 +168,7 @@ export default function AccountManagementPage() {
                         <span
                           className="status-icon"
                           style={{ color: 'green', cursor: 'pointer' }}
-                         
+                          onClick={() => toggleLock(account.id)}
                         >
                           <IonIcon icon={lockOpenOutline} /> Đang hoạt động
                         </span>
@@ -176,6 +176,7 @@ export default function AccountManagementPage() {
                         <span
                           className="status-icon"
                           style={{ color: 'red', cursor: 'pointer' }}
+                          onClick={() => toggleLock(account.id)}
                         >
                           <IonIcon icon={lockClosedOutline} /> Đã khóa
                         </span>

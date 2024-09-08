@@ -369,3 +369,9 @@ table thead tr {
   left: 40%;
   display: none;
 }
+.addcourses{
+  width: 150px;
+  height: 50px;
+  border: #f18f0e solid 1px;
+  border-radius: 10px;
+}
