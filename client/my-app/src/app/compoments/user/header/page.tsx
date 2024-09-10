@@ -67,8 +67,8 @@ const router = useRouter()
             <Link href="/pages/user/home" className="nav-item">
               Trang chủ
             </Link>
-            <Link href="/pages/subjects" className="nav-item">
-              Trang môn
+            <Link href="/pages/user/courses" className="nav-item">
+              Trang khóa thi
             </Link>
             <Link href="/pages/user/contact" className="nav-item">
               Liên hệ

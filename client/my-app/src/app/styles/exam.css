@@ -1,197 +1,223 @@
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-family: Arial, Helvetica, sans-serif;
-}
+/* General Styles */
 body {
-  background-color: #ffc85b28;
-}
-/* header */
-.header-exam {
-  width: 100%;
-  height: 100px;
-  display: flex;
-  background-color: #fdb44b;
-  justify-content: space-between;
-  align-items: center;
-  padding: 40px;
-  border-radius: 10px;
+  margin: 0;
+  font-family: Arial, sans-serif;
+  color: #333;
 }
 
-.logo-header {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-
-.logo-header img {
-  width: 70px;
-  height: 70px;
-  border-radius: 50%;
-}
-
-.logo-header p {
-  font-size: 40px;
-  font-weight: 600;
-}
-
-.main-menu {
-  width: 100%;
-  height: 87vh;
-  background-color: #ffc85b28;
-  border-radius: 10px;
-  padding: 30px;
-  display: flex;
-  justify-content: center;
-  text-align: center;
-  gap: 60px;
-}
-
-.menu-left {
-  width: 300px;
-  height: 200px;
-  background-color: white;
-  border-radius: 20px;
-}
-
-.menu-mid {
-  width: 620px;
-  height: 600px;
-  background-color: white;
-  border-radius: 20px;
-  display: flex;
-  flex-direction: column;
-}
-
-.menu-right {
-  display: grid;
-  grid-template-columns: repeat(5, 1fr);
-  height: max-content;
-  gap: 18px;
-  background-color: white;
-  border-radius: 20px;
-  background-color: white;
-  padding: 10px;
-}
-
-.c {
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  background-color: rgb(193, 202, 209);
-  border: aliceblue;
-  color: beige;
-}
-
-.c:hover {
-  background-color: grey;
-}
-
-.submit-menu {
-  width: 100px;
-  background-color: rgb(36, 250, 104);
-  border: rgb(36, 250, 104);
-  border-radius: 10px;
-  margin-top: 40px;
-  padding: 10px;
-  grid-column: 1/6;
-  box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.238);
-}
-.submit-menu a {
-  color: white !important;
-}
-
-.submit-menu:hover {
-  background-color: rgb(0, 200, 140);
-  margin-bottom: 10px;
-  margin-left: 10px;
-}
-
-.avt {
-  width: 300px;
-  height: 100px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 20px;
-}
-
-.avt img {
-  border: 10px solid #ffc85b28;
-  width: 80px;
-  height: 80px;
-  border-radius: 50%;
-}
-
-.avt p {
-  font-size: 22px;
-  font-weight: 600;
-}
-
-.question {
-  font-size: 20px;
-  background-color: #ffc85b28;
-  border-radius: 8px;
-  margin: 8px;
+.main-backgroup {
+  background-color: #f5f5f5;
   padding: 20px;
 }
 
-.answer {
-  display: flex;
-  flex-direction: column;
+.main-subject {
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  padding: 20px;
+}
+
+h1, h2, h3 {
+  margin: 0;
+}
+
+h1 {
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
+h2 {
   font-size: 20px;
+  margin-bottom: 15px;
 }
 
-.answer {
-  display: flex;
-  flex-direction: column;
-  gap: 30px;
-  padding: 30px;
+h3 {
+  font-size: 18px;
 }
 
-.answer1 {
+/* Exam Details */
+.perform {
   display: flex;
+  height: 300px;
+  padding: 20px;
   align-items: center;
-  gap: 30px;
-}
-
-.answer1 input {
-  width: 30px;
-  height: 30px;
-}
-
-.button-menu {
-  display: flex;
-  justify-content: space-between;
-  padding: 30px;
-  align-items: end;
-}
-
-.button-menu button {
+  margin-bottom: 20px;
+  background-color: #d6d5d5;
   border-radius: 10px;
-  background-color: #ffc93c;
-  color: white;
-  border: #f96d00;
-  margin-top: 70px;
-  padding: 10px;
-  box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.238);
 }
 
-.button-menu button:hover {
-  margin: 0px 0px 4px 4px;
-  background-color: #ff9a3c;
-}
-
-#countdown {
-  font-size: 50px;
+.number-exam {
+  font-size: 24px;
   font-weight: bold;
-  color: orange;
+  background-color: #e0e0e0;
+  padding: 10px;
+  border-radius: 5px;
+  margin-right: 20px;
 }
 
-.time {
+.question-content {
+  flex-grow: 1;
+}
+
+.Info-detail {
   display: flex;
+
+}
+
+#img-detail {
+  width: 300px;
+  height: 200px;
+  border-radius: 8px;
+  margin-right: 20px;
+}
+
+.Information-test {
+  max-width: 600px;
+}
+
+.star i {
+  color: gold;
+  margin-right: 2px;
+}
+
+.start-exam {
+  display: inline-flex;
   align-items: center;
-  justify-content: center;
+  background-color: #007bff;
+  color: #fff;
+  padding: 10px 20px;
+  border-radius: 5px;
+  text-decoration: none;
+}
+
+.start-exam:hover {
+  background-color: #0056b3;
+}
+
+/* Reference Exams */
+.list-subject {
+  margin-top: 20px;
+}
+
+#referenceSubject {
+  display: flex;
+  flex-wrap: wrap;
   gap: 20px;
 }
+
+.exam-item {
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  padding: 10px;
+  max-width: 300px;
+  text-align: center;
+}
+
+.exam-item img {
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+}
+
+.exam-item button {
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+.exam-item button:hover {
+  background-color: #0056b3;
+}
+
+/* Pagination */
+.pagination {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.pagination a {
+  margin: 0 5px;
+  text-decoration: none;
+  color: #007bff;
+}
+
+.pagination .active {
+  font-weight: bold;
+  color: #0056b3;
+}
+
+/* Comments Section */
+.coment {
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  padding: 20px;
+  margin-top: 20px;
+}
+
+.coment1, .coment2 {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+#imgAccount {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  margin-right: 15px;
+}
+
+textarea {
+  width: calc(100% - 20px);
+  margin-right: 10px;
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  resize: none;
+}
+
+button {
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-right: 10px;
+}
+
+button:hover {
+  background-color: #0056b3;
+}
+
+.coment3 {
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  padding: 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.coment3 p {
+  margin: 0;
+}
+
+#upAndDown {
+  font-size: 24px;
+}
+
+.coment4 {
+  margin-top: 10px;
+}
+
