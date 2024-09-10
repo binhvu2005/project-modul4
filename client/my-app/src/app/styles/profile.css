@@ -1,195 +1,139 @@
-.profile {
-  background-color: #ffc85b28;
-  border-radius: 10px;
-  padding: 20px 154px;
-  display: flex;
-  align-items: center;
-  gap: 40px;
-}
-body {
-  background-color: #ffc85b28;
-}
-
-.profile-left {
-  width: 300px;
-  height: 200px;
-  border-radius: 20px;
-  background-color: white;
-  padding: 10px;
+/* profile.css */
+.content-container {
   padding: 20px;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.private-list {
   display: flex;
-  flex-direction: column;
-  gap: 10px;
+  justify-content: space-around;
+  margin-bottom: 20px;
 }
 
-.left1 {
-  height: 50px;
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  border-radius: 10px;
-  padding: 0 10px;
+.private-list a {
+  text-decoration: none;
+  color: #007bff;
 }
 
-.left1 p {
-  font-size: 25px;
-}
-
-.left1:hover {
-  background-color: #f5f5f5;
-}
-
-.profile-right {
-  width: 70%;
-  border-radius: 20px;
-  background-color: white;
-  padding: 30px;
-}
-
-.change-avt {
-  display: flex;
-  flex-direction: column;
-  gap: 30px;
-}
-#changeAvt {
-  padding: 10px;
-  border: transparent;
+.choose-private {
+  padding: 12px 20px;
   border-radius: 8px;
-  background-color: gold;
-  font-size: 20px;
-}
-#changeAvt:hover {
-  background-color: goldenrod;
-}
-
-.profile-avt {
-  height: 300px;
-  width: 300px;
-  border-radius: 14px;
-}
-
-.profile-form {
-  width: 60%;
-  background-color: #f5f5f5;
-  padding: 20px;
-  display: flex;
-  flex-direction: column;
-  row-gap: 20px;
-  border-radius: 10px;
-}
-
-.form1 {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-
-.profile-form .form1 h2 {
+  background-color: #e9ecef;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  font-size: 16px;
   font-weight: 500;
+  transition: background-color 0.3s, box-shadow 0.3s;
 }
 
-.form-button {
-  display: flex;
-  gap: 100px;
-  align-items: center;
-  justify-content: center;
+.choose-private:hover {
+  background-color: #dee2e6;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
-.changePass {
-  padding: 10px 20px;
-  border-radius: 10px;
-  background-color: gold;
-  border: rgb(117, 194, 2);
-  color: white;
-  box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;
-}
-
-#changePass:hover {
-  background-color: goldenrod;
-}
-
-#submitForm {
-  width: 100px;
-  height: 30px;
-  border-radius: 10px;
-  border-radius: 10px;
-  background-color: rgb(0, 96, 221);
-  border: rgb(2, 85, 194);
-  color: white;
-  box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;
-}
-
-#submitForm:hover {
-  background-color: rgb(2, 81, 184);
-}
-
-/* -----------thông tin thay đổi */
-.changeInfoInput {
-  height: 400px;
-  width: 400px;
-  background-color: red;
-  position: absolute;
-}
-
-/* footer----------------------- */
-.footer {
-  padding: 60px 154px 60px 154px;
-  background-color: #fdb44b;
-  font-family: Arial, Helvetica, sans-serif;
-}
-
-.footer .footer-content {
-  display: flex;
-  gap: 100px;
-  margin-bottom: 60px;
-}
-
-.footer .footer-content .footer-left {
-  width: 50%;
-  display: flex;
-  flex-direction: column;
-  gap: 28px;
-}
-
-.footer-content .footer-left p {
-  color: black;
-}
-
-.footer-content .footer-left .footer-logo {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  color: black;
-}
-
-.footer-content .footer-left .flogo-list {
-  margin-top: -20px;
-  font-size: 40px;
-  display: flex;
-  gap: 10px;
-  color: black;
-}
-
-.footer-content .footer-right {
-  width: 50%;
-}
-
-.footer-right .ftable {
-  width: 100%;
-}
-
-.ftable .ftable-items .ftable-item {
+.private-info {
   padding: 20px;
+  border-radius: 8px;
+  background-color: #fff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.image-container {
   text-align: center;
-  color: black;
+  margin-bottom: 20px;
 }
 
-.ftable .ftable-items {
-  color: black;
+.profile-image {
+  width: 150px;
+  height: 500px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid #ddd;
 }
 
-.footer .end {
-  padding-top: 30px;
+.profile-name {
+  margin-top: 10px;
+  font-size: 20px;
+  font-weight: 600;
+  color: #333;
+}
+
+.btn-change-avatar,
+.btn-update-profile,
+.btn-change-password {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 8px;
+  background-color: #28a745;
+  color: #fff;
+  font-size: 16px;
+  cursor: pointer;
+  margin: 5px;
+  transition: background-color 0.3s;
+}
+
+.btn-change-avatar:hover,
+.btn-update-profile:hover,
+.btn-change-password:hover {
+  background-color: #218838;
+}
+
+.user-information {
+  margin-top: 20px;
+}
+
+.info-title {
+  text-align: center;
+  padding: 12px;
+  background-color: #343a40;
+  color: #fff;
+  border-radius: 8px;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.info-item {
   display: flex;
   justify-content: space-between;
+  padding: 12px;
+  border-bottom: 1px solid #dee2e6;
+}
+
+.info-item:last-child {
+  border-bottom: none;
+}
+
+.info-item label {
+  font-weight: 600;
+  color: #495057;
+}
+
+.info-item span {
+  color: #6c757d;
+}
+/* Styling for the Change Avatar button */
+.change-avatar-button {
+  display: inline-block;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 6px;
+  background-color: #99f530; /* Green background */
+
+
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.change-avatar-button:hover {
+  background-color: #f9fc56; /* Darker green on hover */
+  transform: scale(1.05); /* Slight zoom effect */
+}
+
+.change-avatar-button:focus {
+  outline: none;
+}
+
+.change-avatar-button:active {
+  background-color: #b9b720; /* Even darker green on click */
+  transform: scale(0.98); /* Slightly smaller on click */
 }

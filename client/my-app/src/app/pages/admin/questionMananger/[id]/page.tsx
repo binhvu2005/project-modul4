@@ -17,6 +17,7 @@ interface Question {
   idExam: number;
   questionName: string;
   answerList: Answer[];
+  id: string;
 }
 
 export default function QuestionPage({ params }: { params: { id: string } }) {
@@ -78,8 +79,8 @@ export default function QuestionPage({ params }: { params: { id: string } }) {
   const totalPages = Math.ceil(filteredQuestions.length / questionsPerPage);
 
   // Handle delete functionality
-  const handleDelete = (questionId: number) => {
-    console.log(questionId);
+  const handleDelete = (id: string) => {
+ 
     
     Swal.fire({
       title: "Bạn có chắc chắn muốn xóa?",
@@ -93,8 +94,7 @@ export default function QuestionPage({ params }: { params: { id: string } }) {
     }).then((result) => {
       if (result.isConfirmed) {
         axios
-          .delete(`http://localhost:5000/question/${questionId}`)
-
+          .delete(`http://localhost:5000/question/${id}`)
           .then(() => {
             fetchQuestions();
             Swal.fire("Đã xóa!", "Câu hỏi đã bị xóa.", "success");
@@ -106,7 +106,9 @@ export default function QuestionPage({ params }: { params: { id: string } }) {
       }
     });
   };
-
+  function getRandomFourDigitNumber() {
+    return Math.floor(1000 + Math.random() * 9000);
+  }
   // Handle add functionality
   const handleAdd = () => {
     Swal.fire({
@@ -146,6 +148,7 @@ export default function QuestionPage({ params }: { params: { id: string } }) {
     }).then((result) => {
       if (result.isConfirmed) {
         const newQuestion = {
+            questionId:getRandomFourDigitNumber() ,
           questionName: result.value.questionName,
           idExam: examId,
           answerList: result.value.answers.map((answer:Answer, index:number) => ({
@@ -168,7 +171,7 @@ export default function QuestionPage({ params }: { params: { id: string } }) {
     });
   };
 
-  // Handle edit functionality
+
   const handleEdit = (question: Question) => {
     Swal.fire({
       title: "Chỉnh sửa câu hỏi",
@@ -216,7 +219,7 @@ export default function QuestionPage({ params }: { params: { id: string } }) {
         };
 
         axios
-          .put(`http://localhost:5000/question/${question.questionId}`, updatedQuestion)
+          .put(`http://localhost:5000/question/${question.id}`, updatedQuestion)
           .then(() => {
             fetchQuestions();
             Swal.fire("Thành công!", "Câu hỏi đã được cập nhật.", "success");
@@ -262,7 +265,7 @@ export default function QuestionPage({ params }: { params: { id: string } }) {
                     <td>{question.answerList.find(a => a.status === 1)?.answer || 'Chưa xác định'}</td>
                     <td>
                       <button onClick={() => handleEdit(question)} className="btn-edit">Sửa</button>
-                      <button onClick={() => handleDelete(question.questionId)} className="btn-delete">Xóa</button>
+                      <button onClick={() => handleDelete(question.id)} className="btn-delete">Xóa</button>
            
                       
                     </td>

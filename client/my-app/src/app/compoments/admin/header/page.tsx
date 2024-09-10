@@ -1,9 +1,17 @@
-import { SignOutButton, UserButton } from '@clerk/nextjs';
+"use client"
+import { SignOutButton, useAuth, UserButton } from '@clerk/nextjs';
 import React from 'react';
-
+import { useRouter } from 'next/navigation';
 
 export default function Page() {
-  
+  const { isSignedIn } = useAuth();
+  console.log(isSignedIn);
+
+  const router = useRouter();
+  function check() {
+    if (!isSignedIn) {
+      router.push("/pages/admin/sign-in");
+    } else {
   return (
     <div>
       <header className="header-admin">
@@ -26,5 +34,6 @@ export default function Page() {
         </div>
       </header>
     </div>
-  );
+  );}}
+  return <div>{check()}</div>;
 }

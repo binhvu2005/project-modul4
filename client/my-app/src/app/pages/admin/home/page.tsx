@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import Header from '@/app/compoments/admin/header/page';
@@ -88,7 +88,7 @@ export default function AdminPage() {
                       <td>{user.id}</td>
                       <td>{user.nameAccount}</td>
                       <td>{user.status === 1 ? 'On' : 'Off'}</td>
-                      <td>{user.result.length}</td>
+                      <td>{user.result?.length || 0}</td> {/* Use optional chaining and default value */}
                     </tr>
                   ))}
                 </tbody>

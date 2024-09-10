@@ -13,7 +13,7 @@ interface Account {
   id: number;
   nameAccount: string;
   email: string;
-  status: number;
+  lock: string; // 'open' or 'lock'
 }
 
 export default function AccountManagementPage() {
@@ -71,30 +71,47 @@ export default function AccountManagementPage() {
 
   const toggleLock = (id: number) => {
     const account = accounts.find(acc => acc.id === id);
-    
+  
     if (!account) return;
-
+  
     Swal.fire({
-      title: `Bạn có chắc muốn ${account.status === 1 ? 'khóa' : 'mở khóa'} tài khoản này?`,
+      title: `Bạn có chắc muốn ${account.lock === 'open' ? 'khóa' : 'mở khóa'} tài khoản này?`,
       icon: "warning",
       showCancelButton: true,
       confirmButtonText: "Có",
       cancelButtonText: "Không"
     }).then(result => {
       if (result.isConfirmed) {
-        const updatedAccounts = accounts.map(acc =>
-          acc.id === id ? { ...acc, status: acc.status === 1 ? 0 : 1 } : acc
-        );
-        setAccounts(updatedAccounts);
-        setFilteredAccounts(updatedAccounts);
-
-        Swal.fire({
-          title: `Tài khoản đã được ${updatedAccounts.find(acc => acc.id === id)?.status === 1 ? 'mở khóa' : 'khóa'}.`,
-          icon: "success",
-        });
+        // Make the API call to update the lock status in the backend
+        axios
+          .put(`http://localhost:5000/userList/${id}`, {
+            ...account,
+            lock: account.lock === 'open' ? 'lock' : 'open'
+          })
+          .then(response => {
+            // Update the local state only if the API call is successful
+            const updatedAccounts = accounts.map(acc =>
+              acc.id === id ? { ...acc, lock: acc.lock === 'open' ? 'lock' : 'open' } : acc
+            );
+            setAccounts(updatedAccounts);
+            setFilteredAccounts(updatedAccounts);
+  
+            Swal.fire({
+              title: `Tài khoản đã được ${updatedAccounts.find(acc => acc.id === id)?.lock === 'open' ? 'mở khóa' : 'khóa'}.`,
+              icon: "success",
+            });
+          })
+          .catch(error => {
+            console.error('Error updating account lock status:', error);
+            Swal.fire({
+              title: 'Lỗi khi cập nhật trạng thái khóa/mở khóa!',
+              icon: 'error',
+            });
+          });
       }
     });
   };
+  
 
   const viewDetails = (account: Account) => {
     Swal.fire({
@@ -103,7 +120,7 @@ export default function AccountManagementPage() {
         <strong>ID:</strong> ${account.id}<br/>
         <strong>Tên tài khoản:</strong> ${account.nameAccount}<br/>
         <strong>Email:</strong> ${account.email}<br/>
-        <strong>Trạng thái:</strong> ${account.status === 1 ? 'Đang hoạt động' : 'Đã khóa'}
+        <strong>Trạng thái khóa:</strong> ${account.lock === 'open' ? 'Mở khóa' : 'Đã khóa'}
       `,
       icon: 'info'
     });
@@ -153,7 +170,7 @@ export default function AccountManagementPage() {
                   <th>ID</th>
                   <th>Tên Tài Khoản</th>
                   <th>Email</th>
-                  <th>Trạng Thái</th>
+                  <th>Trạng Thái Khóa</th>
                   <th>Hành Động</th>
                 </tr>
               </thead>
@@ -164,13 +181,13 @@ export default function AccountManagementPage() {
                     <td>{account.nameAccount}</td>
                     <td>{account.email}</td>
                     <td>
-                      {account.status === 1 ? (
+                      {account.lock === 'open' ? (
                         <span
                           className="status-icon"
                           style={{ color: 'green', cursor: 'pointer' }}
                           onClick={() => toggleLock(account.id)}
                         >
-                          <IonIcon icon={lockOpenOutline} /> Đang hoạt động
+                          <IonIcon icon={lockOpenOutline} /> Mở khóa
                         </span>
                       ) : (
                         <span
@@ -187,7 +204,7 @@ export default function AccountManagementPage() {
                         <IonIcon icon={eyeOutline} /> Xem
                       </button>
                       <button onClick={() => toggleLock(account.id)}>
-                        {account.status === 1 ? 'Khóa' : 'Mở khóa'}
+                        {account.lock === 'open' ? 'Khóa' : 'Mở khóa'}
                       </button>
                     </td>
                   </tr>

@@ -64,7 +64,7 @@
       "phone": "0987654321",
       "address": "Lào Cai",
       "password": "1234567",
-      "status": 0,
+      "status": 1,
       "result": [
         {
           "idExem": 100001,
@@ -5374,7 +5374,7 @@
           "status": 0
         },
         {
-          "answer": "Kali",
+          "answer": "cali",
           "status": 0
         }
       ],
@@ -7757,27 +7757,9 @@
       "id": "2c34"
     },
     {
-      "id": "2b7b",
-      "questionName": "q",
-      "idExam": 300001,
-      "answerList": [
-        {
-          "answer": "ư",
-          "status": 1
-        },
-        {
-          "answer": "qư",
-          "status": 0
-        },
-        {
-          "answer": "q",
-          "status": 0
-        }
-      ]
-    },
-    {
-      "id": "8979",
-      "questionName": "12",
+      "id": "9e3c",
+      "questionId": 9396,
+      "questionName": "1123",
       "idExam": 300001,
       "answerList": [
         {
@@ -7785,15 +7767,15 @@
           "status": 1
         },
         {
-          "answer": "312",
+          "answer": "123132",
           "status": 0
         },
         {
-          "answer": "312",
+          "answer": "123123",
           "status": 0
         },
         {
-          "answer": "312",
+          "answer": "123",
           "status": 0
         }
       ]

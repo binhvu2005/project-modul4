@@ -1,6 +1,12 @@
 html,
 body {
   overflow-x: hidden;
+  background-image: url('https://th.bing.com/th/id/OIP.P18rVcY6klv-EzDZfqgWmwHaE7?rs=1&pid=ImgDetMain');  
+  background-size: cover;  
+  background-position: center;  
+  background-repeat: no-repeat;  
+  width: 100%;  
+  height: 100vh;
 }
 
 * {
