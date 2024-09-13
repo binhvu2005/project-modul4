@@ -83,7 +83,7 @@ export default function Page({ params }: { params: { id: string } }) {
                     <i className="fas fa-star" />
                   </div>
                   <a id="indexElement" href="">
-                    <Link href={`/pages/user/exam/${exam.id}`} className="start-exam">
+                    <Link href={`/pages/user/test/${exam.id}`} className="start-exam">
                       <i className="fas fa-user-clock" />
                       <b>Bắt Đầu Làm Bài</b>
                     </Link>

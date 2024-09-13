@@ -288,3 +288,105 @@ a {
   display: flex;
   justify-content: space-between;
 }
+/* test-result.css */
+
+.section {
+  display: flex;
+  
+  align-items: center;
+  margin: 20px;
+}
+
+.left-container, .right-container {
+  display: inline-block;
+  width: 50%;
+}
+
+.result {
+  text-align: left;
+}
+
+.mark {
+  font-size: 36px;
+  font-weight: bold;
+  color: green;
+}
+
+.info {
+  margin-top: 20px;
+}
+
+button {
+  background-color: #fcbf2e;
+  color: white;
+  padding: 10px;
+  border: none;
+  cursor: pointer;
+}
+
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+  gap: 5px;
+}
+
+.pagination button {
+  padding: 10px 15px;
+  border: none;
+  background-color: #f0f0f0;
+  color: #333;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  border-radius: 5px;
+}
+
+.pagination button.active {
+  background-color: #4CAF50; /* Màu xanh cho nút active */
+  color: white;
+}
+
+.pagination button:hover {
+  background-color: #ddd; /* Màu khi hover */
+}
+
+.pagination button.prev-next {
+  font-weight: bold;
+}
+
+.pagination button:disabled {
+  background-color: #ccc; /* Màu cho nút disabled */
+  cursor: not-allowed;
+}
+
+
+.num-questions {
+  display: flex;
+  flex-direction: column;
+}
+
+.question {
+  margin-bottom: 20px;
+}
+
+.answer {
+  margin-bottom: 10px;
+}
+
+.correct {
+  background-color: lightgreen;
+}
+
+.incorrect {
+  background-color: lightcoral;
+}
+
+.pagination button {
+  margin: 5px;
+}
+
+.active {
+  background-color: blue;
+  color: white;
+}

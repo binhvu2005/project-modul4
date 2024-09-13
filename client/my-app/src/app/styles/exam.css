@@ -221,3 +221,31 @@ button:hover {
   margin-top: 10px;
 }
 
+.c {
+  background-color: #f1f1f1;
+  border: 1px solid #ccc;
+  padding: 10px;
+  margin: 5px;
+  cursor: pointer;
+}
+
+.c.answered {
+  background-color: #28a745; /* Xanh lá khi đã trả lời */
+  color: white;
+}
+
+.c.current {
+  background-color: #007bff; /* Xanh dương cho câu hỏi hiện tại */
+  color: white;
+}
+
+.c:hover {
+  background-color: #ddd;
+}
+
+.submit-menu {
+  background-color: #FCBA2C;
+  padding: 10px;
+  margin-top: 20px;
+  cursor: pointer;
+}

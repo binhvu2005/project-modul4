@@ -20,7 +20,228 @@
       "description": "qưeq"
     }
   ],
-  "userAnswer": [],
+  "userAnswer": [
+    {
+      "id": "9950",
+      "idExam": "100002",
+      "idUser": "98765",
+      "score": 1.5,
+      "time": "00:35",
+      "date": "9/11/2024, 5:24:08 AM",
+      "answers": [
+        {
+          "questionId": "246f",
+          "selectedAnswer": "0",
+          "isCorrect": true
+        },
+        {
+          "questionId": "d2e3",
+          "selectedAnswer": "2",
+          "isCorrect": false
+        },
+        {
+          "questionId": "ff1c",
+          "selectedAnswer": "2",
+          "isCorrect": false
+        },
+        {
+          "questionId": "b420",
+          "selectedAnswer": "0",
+          "isCorrect": false
+        },
+        {
+          "questionId": "a0f0",
+          "selectedAnswer": "2",
+          "isCorrect": false
+        },
+        {
+          "questionId": "bff7",
+          "selectedAnswer": "2",
+          "isCorrect": false
+        },
+        {
+          "questionId": "35f2",
+          "selectedAnswer": null,
+          "isCorrect": false
+        },
+        {
+          "questionId": "881d",
+          "selectedAnswer": null,
+          "isCorrect": false
+        },
+        {
+          "questionId": "e9f5",
+          "selectedAnswer": null,
+          "isCorrect": false
+        },
+        {
+          "questionId": "8348",
+          "selectedAnswer": null,
+          "isCorrect": false
+        },
+        {
+          "questionId": "0c8f",
+          "selectedAnswer": null,
+          "isCorrect": false
+        },
+        {
+          "questionId": "f3e6",
+          "selectedAnswer": null,
+          "isCorrect": false
+        },
+        {
+          "questionId": "4188",
+          "selectedAnswer": null,
+          "isCorrect": false
+        },
+        {
+          "questionId": "b55b",
+          "selectedAnswer": null,
+          "isCorrect": false
+        },
+        {
+          "questionId": "f717",
+          "selectedAnswer": null,
+          "isCorrect": false
+        },
+        {
+          "questionId": "f22a",
+          "selectedAnswer": "2",
+          "isCorrect": true
+        },
+        {
+          "questionId": "5d7b",
+          "selectedAnswer": "3",
+          "isCorrect": false
+        },
+        {
+          "questionId": "42fd",
+          "selectedAnswer": "2",
+          "isCorrect": true
+        },
+        {
+          "questionId": "1b9a",
+          "selectedAnswer": "3",
+          "isCorrect": false
+        },
+        {
+          "questionId": "8702",
+          "selectedAnswer": null,
+          "isCorrect": false
+        }
+      ]
+    },
+    {
+      "id": 5743,
+      "idExam": "100002",
+      "idUser": "98765",
+      "score": 2,
+      "time": "00:40",
+      "date": "9/13/2024, 11:52:36 AM",
+      "answers": [
+        {
+          "questionId": "b420",
+          "selectedAnswer": "0",
+          "isCorrect": false
+        },
+        {
+          "questionId": "d2e3",
+          "selectedAnswer": "0",
+          "isCorrect": false
+        },
+        {
+          "questionId": "bff7",
+          "selectedAnswer": "1",
+          "isCorrect": false
+        },
+        {
+          "questionId": "0c8f",
+          "selectedAnswer": "2",
+          "isCorrect": false
+        },
+        {
+          "questionId": "f717",
+          "selectedAnswer": "1",
+          "isCorrect": false
+        },
+        {
+          "questionId": "42fd",
+          "selectedAnswer": "3",
+          "isCorrect": false
+        },
+        {
+          "questionId": "246f",
+          "selectedAnswer": "1",
+          "isCorrect": true
+        },
+        {
+          "questionId": "5d7b",
+          "selectedAnswer": "3",
+          "isCorrect": true
+        },
+        {
+          "questionId": "8702",
+          "selectedAnswer": "2",
+          "isCorrect": true
+        },
+        {
+          "questionId": "4188",
+          "selectedAnswer": "1",
+          "isCorrect": false
+        },
+        {
+          "questionId": "ff1c",
+          "selectedAnswer": "3",
+          "isCorrect": true
+        },
+        {
+          "questionId": "e9f5",
+          "selectedAnswer": "2",
+          "isCorrect": false
+        },
+        {
+          "questionId": "35f2",
+          "selectedAnswer": "1",
+          "isCorrect": false
+        },
+        {
+          "questionId": "8348",
+          "selectedAnswer": "2",
+          "isCorrect": false
+        },
+        {
+          "questionId": "a0f0",
+          "selectedAnswer": "3",
+          "isCorrect": false
+        },
+        {
+          "questionId": "1b9a",
+          "selectedAnswer": null,
+          "isCorrect": false
+        },
+        {
+          "questionId": "b55b",
+          "selectedAnswer": null,
+          "isCorrect": false
+        },
+        {
+          "questionId": "f22a",
+          "selectedAnswer": null,
+          "isCorrect": false
+        },
+        {
+          "questionId": "f3e6",
+          "selectedAnswer": "1",
+          "isCorrect": false
+        },
+        {
+          "questionId": "881d",
+          "selectedAnswer": "3",
+          "isCorrect": false
+        }
+      ]
+    }
+  ],
   "userList": [
     {
       "img": "https://www.w3schools.com/howto/img_avatar.png",
@@ -75,6 +296,18 @@
           "score": 0.5,
           "time": "12:30",
           "date": "3/20/2024 11:02"
+        },
+        {
+          "idTest": 9950,
+          "score": 1.5,
+          "time": "00:35",
+          "date": "9/11/2024, 5:24:08 AM"
+        },
+        {
+          "idTest": 5743,
+          "score": 2,
+          "time": "00:40",
+          "date": "9/13/2024, 11:52:36 AM"
         }
       ],
       "lock": "open"
