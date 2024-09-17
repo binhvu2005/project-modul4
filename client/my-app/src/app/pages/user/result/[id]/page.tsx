@@ -31,12 +31,12 @@ export interface Exam {
 
 export interface Answer {
   answer: string;
-  status: number; // Assuming 1 is correct and 0 is incorrect
+  status: number; 
 }
 
 export interface Question {
-  questionId: string; // Ensure it matches API data
-  idExam: string; // Ensure it matches API data
+  questionId: string; 
+  idExam: string; 
   questionName: string;
   answerList: Answer[];
   explanation?: string; 
@@ -55,7 +55,7 @@ export default function Page({ params }: { params: { id: string } }) {
     const fetchResult = async () => {
       try {
         const response = await axios.get<UserAnswer[]>("http://localhost:5000/userAnswer");
-        const resultData = response.data.find((r) => r.id === idTest);
+        const resultData = response.data.find((r) => r.id == idTest);
         setResult(resultData || null);
       } catch (error) {
         console.error("Error fetching result:", error);
@@ -69,7 +69,7 @@ export default function Page({ params }: { params: { id: string } }) {
     const fetchExam = async () => {
       try {
         const response = await axios.get<Exam[]>("http://localhost:5000/examList");
-        const examData = response.data.find((e) => e.id === result?.idExam);
+        const examData = response.data.find((e) => e.id == result?.idExam);
         setExam(examData || null);
       } catch (error) {
         console.error("Error fetching exam:", error);
@@ -102,8 +102,11 @@ export default function Page({ params }: { params: { id: string } }) {
   const currentQuestions = questions.slice(indexOfFirstQuestion, indexOfLastQuestion);
 
   const paginate = (pageNumber: number) => setCurrentPage(pageNumber);
+console.log(11111,result);
+console.log(22222,exam);
+console.log(33333,questions);
 
-  if (!result || !exam || questions.length === 0) return <div>Loading...</div>;
+  if (!result || !exam || questions.length == 0) return <div>Loading...</div>;
 
   return (
     <div>
@@ -130,12 +133,10 @@ export default function Page({ params }: { params: { id: string } }) {
                 </div>
               </div>
               <div className="button">
-                <a href={`/pages/user/test/${idTest}`}>
+                <a href={`/pages/user/test/${exam.id}`}>
                   <button>Thi lại <i className="fa-solid fa-rotate-left"></i></button>
                 </a>
-                <a href="/pages/user/subjects">
-                  <button>Bài tiếp theo <i className="fa-solid fa-forward"></i></button>
-                </a>
+              
               </div>
               <div className="next-test">
                 <p>
@@ -181,7 +182,7 @@ export default function Page({ params }: { params: { id: string } }) {
                 id={`answer${optIndex}`}
                 name={`question${index}`}
                 value={optIndex}
-                checked={option.status === 1}
+             
                 readOnly
               />
               <label htmlFor={`answer${optIndex}`}>{option.answer}</label>

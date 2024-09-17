@@ -2,11 +2,13 @@
 import React, { useEffect, useState } from "react";
 import Header from "@/app/compoments/admin/header/page";
 import Navbar from "@/app/compoments/admin/navbar/page";
-import Swal from "sweetalert2";
+import Swal from 'sweetalert2';
+
 import axios from "axios";
-import Link from "next/link";
+import { useRouter } from "next/navigation";
 import "../../../../styles/adminSubject.css";
-import {  useRouter } from "next/navigation";
+import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
+import { storage } from "../../../../../../config/firebase";
 
 interface Subject {
   id: string;
@@ -21,11 +23,11 @@ export default function Page({ params }: { params: { id: string } }) {
 
   const courseId = params.id;
   const router = useRouter();
+
   useEffect(() => {
     fetchSubjects();
   }, []);
 
-  // Fetch subjects from server
   const fetchSubjects = () => {
     fetch("http://localhost:5000/subjectList")
       .then((response) => response.json())
@@ -43,7 +45,6 @@ export default function Page({ params }: { params: { id: string } }) {
     setFilteredSubjects(filtered);
   };
 
-  // Handle sorting
   const handleSort = (type: string) => {
     const sortedSubjects = [...filteredSubjects];
     if (type === "subSmallBig") {
@@ -58,7 +59,6 @@ export default function Page({ params }: { params: { id: string } }) {
     setFilteredSubjects(sortedSubjects);
   };
 
-  // Handle search
   const handleSearch = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSearchTerm(event.target.value);
     if (event.target.value === "") {
@@ -71,7 +71,6 @@ export default function Page({ params }: { params: { id: string } }) {
     }
   };
 
-  // Handle Delete functionality
   const handleDelete = (id: string) => {
     Swal.fire({
       title: "Bạn có chắc chắn muốn xóa?",
@@ -98,78 +97,123 @@ export default function Page({ params }: { params: { id: string } }) {
     });
   };
 
-  // Handle Add functionality with SweetAlert2
   const handleAdd = () => {
     Swal.fire({
       title: "Thêm môn học mới",
-      input: "text",
-      inputLabel: "Tên môn học",
-      inputPlaceholder: "Nhập tên môn học",
+      html: `
+        <input type="text" id="subjectName" class="swal2-input" placeholder="Tên môn học">
+        <input type="file" id="subjectImage" class="swal2-input">
+      `,
       showCancelButton: true,
       confirmButtonText: "Thêm",
       cancelButtonText: "Hủy",
-      preConfirm: (subjectName) => {
-        if (!subjectName) {
+      preConfirm: () => {
+        const subjectNameInput = Swal.getPopup()?.querySelector("#subjectName") as HTMLInputElement;
+        const subjectImageInput = Swal.getPopup()?.querySelector("#subjectImage") as HTMLInputElement;
+        if (!subjectNameInput?.value) {
           Swal.showValidationMessage("Vui lòng nhập tên môn học");
         }
-        return subjectName;
-      },
+        const subjectName = subjectNameInput.value;
+        const subjectImageFile = subjectImageInput?.files?.[0];
+        return { subjectName, subjectImageFile };
+      }
     }).then((result) => {
       if (result.isConfirmed) {
-        const newSubject = {
-          idCourese: parseInt(courseId), // Assuming this course ID comes from params
-          subject: result.value,
-        };
+        const { subjectName, subjectImageFile } = result.value;
 
-        axios
-          .post("http://localhost:5000/subjectList", newSubject)
-          .then(() => {
-            fetchSubjects(); // Refresh subjects list after adding
-            Swal.fire("Thành công!", "Môn học mới đã được thêm.", "success");
-          })
-          .catch((error) => {
-            console.error("Error adding subject:", error);
-            Swal.fire("Lỗi!", "Không thể thêm môn học. Vui lòng thử lại.", "error");
+        if (subjectImageFile) {
+          const storageRef = ref(storage, `subjects/${subjectImageFile.name}`);
+          uploadBytes(storageRef, subjectImageFile).then((snapshot) => {
+            getDownloadURL(snapshot.ref).then((downloadURL) => {
+              const newSubject = {
+                idCourese: parseInt(courseId),
+                subject: subjectName,
+                img: downloadURL,
+              };
+
+              axios
+                .post("http://localhost:5000/subjectList", newSubject)
+                .then(() => {
+                  fetchSubjects();
+                  Swal.fire("Thành công!", "Môn học mới đã được thêm.", "success");
+                })
+                .catch((error) => {
+                  console.error("Error adding subject:", error);
+                  Swal.fire("Lỗi!", "Không thể thêm môn học. Vui lòng thử lại.", "error");
+                });
+            });
           });
+        }
       }
     });
   };
-// Add this handleEdit function
-const handleEdit = (subject: Subject) => {
-  // You can add your edit logic here, e.g., navigating to an edit page or opening a modal to edit the subject
-  Swal.fire({
-    title: "Chỉnh sửa môn học",
-    input: "text",
-    inputLabel: "Tên môn học",
-    inputValue: subject.subject,
-    showCancelButton: true,
-    confirmButtonText: "Lưu",
-    cancelButtonText: "Hủy",
-    preConfirm: (newSubjectName) => {
-      if (!newSubjectName) {
-        Swal.showValidationMessage("Tên môn học không được để trống");
+
+  const handleEdit = (subject: Subject) => {
+    Swal.fire({
+      title: "Chỉnh sửa môn học",
+      html: `
+        <input type="text" id="subjectName" class="swal2-input" value="${subject.subject}">
+        <input type="file" id="subjectImage" class="swal2-input">
+      `,
+      showCancelButton: true,
+      confirmButtonText: "Lưu",
+      cancelButtonText: "Hủy",
+      preConfirm: () => {
+        const subjectNameInput = Swal.getPopup()?.querySelector("#subjectName") as HTMLInputElement;
+        const subjectImageInput = Swal.getPopup()?.querySelector("#subjectImage") as HTMLInputElement;
+        if (!subjectNameInput?.value) {
+          Swal.showValidationMessage("Tên môn học không được để trống");
+        }
+        const newSubjectName = subjectNameInput.value;
+        const newSubjectImageFile = subjectImageInput?.files?.[0];
+        return { newSubjectName, newSubjectImageFile };
       }
-      return newSubjectName;
-    },
-  }).then((result) => {
-    if (result.isConfirmed) {
-      // Here you can call an API to update the subject
-      axios
-        .put(`http://localhost:5000/subjectList/${subject.id}`, {
-          ...subject,
-          subject: result.value,
-        })
-        .then(() => {
-          fetchSubjects(); // Refresh the subject list
-          Swal.fire("Đã lưu!", "Môn học đã được cập nhật.", "success");
-        })
-        .catch((error) => {
-          console.error("Error updating subject:", error);
-          Swal.fire("Lỗi!", "Không thể cập nhật môn học. Vui lòng thử lại.", "error");
-        });
-    }
-  });
-};
+    }).then((result) => {
+      if (result.isConfirmed) {
+        const { newSubjectName, newSubjectImageFile } = result.value;
+
+        if (newSubjectImageFile) {
+          const storageRef = ref(storage, `subjects/${newSubjectImageFile.name}`);
+          uploadBytes(storageRef, newSubjectImageFile).then((snapshot) => {
+            getDownloadURL(snapshot.ref).then((downloadURL) => {
+              const updatedSubject = {
+                ...subject,
+                subject: newSubjectName,
+                img: downloadURL,
+              };
+
+              axios
+                .put(`http://localhost:5000/subjectList/${subject.id}`, updatedSubject)
+                .then(() => {
+                  fetchSubjects();
+                  Swal.fire("Đã lưu!", "Môn học đã được cập nhật.", "success");
+                })
+                .catch((error) => {
+                  console.error("Error updating subject:", error);
+                  Swal.fire("Lỗi!", "Không thể cập nhật môn học. Vui lòng thử lại.", "error");
+                });
+            });
+          });
+        } else {
+          const updatedSubject = {
+            ...subject,
+            subject: newSubjectName,
+          };
+
+          axios
+            .put(`http://localhost:5000/subjectList/${subject.id}`, updatedSubject)
+            .then(() => {
+              fetchSubjects();
+              Swal.fire("Đã lưu!", "Môn học đã được cập nhật.", "success");
+            })
+            .catch((error) => {
+              console.error("Error updating subject:", error);
+              Swal.fire("Lỗi!", "Không thể cập nhật môn học. Vui lòng thử lại.", "error");
+            });
+        }
+      }
+    });
+  };
 
   return (
     <div>
@@ -187,55 +231,44 @@ const handleEdit = (subject: Subject) => {
                 style={{ padding: "6px 16px", backgroundColor: "lightgrey", borderRadius: 6 }}
               >
                 <option value="subDefault">Theo mã môn</option>
-                <option value="subSmallBig">Từ nhỏ - lớn</option>
-                <option value="subBigSmall">Từ lớn - nhỏ</option>
+                <option value="subSmallBig">Mã môn nhỏ đến lớn</option>
+                <option value="subBigSmall">Mã môn lớn đến nhỏ</option>
+                <option value="AZ">A-Z</option>
+                <option value="ZA">Z-A</option>
               </select>
-              <select
-                onChange={(e) => handleSort(e.target.value)}
-                style={{ padding: "6px 16px", backgroundColor: "lightgrey", borderRadius: 6 }}
-              >
-                <option value="">Theo tên môn</option>
-                <option value="AZ">Từ A - Z</option>
-                <option value="ZA">Từ Z - A</option>
-              </select>
-            </div>
-            <div className="search-bar">
-              <input
-                type="text"
-                placeholder="Tìm kiếm môn học"
-                value={searchTerm}
-                onChange={handleSearch}
-                style={{ padding: "6px 16px", borderRadius: 6 }}
-              />
+              <div className="search-box">
+                <input
+                  type="text"
+                  placeholder="Tìm kiếm môn học"
+                  value={searchTerm}
+                  onChange={handleSearch}
+                />
+              </div>
             </div>
             <table className="table">
               <thead>
                 <tr>
-                  <th>ID</th>
+                  <th>Mã môn</th>
                   <th>Môn học</th>
-                
                   <th>Chi tiết</th>
-                  <th>Hành động</th>
+                  <th>Thao tác</th>
                 </tr>
               </thead>
-              <tbody id="tableSubject">
+              <tbody>
                 {filteredSubjects.map((subject) => (
                   <tr key={subject.id}>
                     <td>{subject.id}</td>
                     <td>{subject.subject}</td>
-                  
-                    <td>
-                      <button
+                    <td> <button
                         onClick={() =>
                           router.push(`/pages/admin/examMananger/${subject.id}`)
                         }
                       >
                         Chi tiết
-                      </button>
-                      </td>
+                      </button></td>
                     <td>
-                      <button onClick={() => handleEdit(subject)}>Sửa</button>
-                      <button onClick={() => handleDelete(subject.id)}>Xóa</button>
+                      <button onClick={() => handleEdit(subject)} className="btn-edit">Sửa</button>
+                      <button onClick={() => handleDelete(subject.id)} className="btn-delete">Xóa</button>
                     </td>
                   </tr>
                 ))}

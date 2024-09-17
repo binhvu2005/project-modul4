@@ -7,7 +7,7 @@ import "../../../styles/adminHome.css";
 
 // Define the type for exam
 interface Exam {
-  subject: string;
+  sequence: number;
   name: string;
   level: string;
 }
@@ -36,16 +36,15 @@ export default function AdminPage() {
     // Fetch exams from external API
     axios.get('http://localhost:5000/examList')
       .then((response) => {
-        const examData: Exam[] = [];
-        response.data.forEach((exam: { name: string; level: string }) => {
-            examData.push({
-              subject: 'Toán', // Replace with actual subject name
-              name: exam.name,
-              level: exam.level,
-            });
-          });
-    
-        setExams(examData);
+        const examData: Exam[] = response.data.map((exam: { name: string; level: string ; sequence: number }) => ({
+          name: exam.name,
+          level: exam.level,
+          sequence: exam.sequence,
+        }));
+
+        // Sort exams by sequence (descending order) and take top 4
+        const sortedExams = examData.sort((a, b) => b.sequence - a.sequence).slice(0, 4);
+        setExams(sortedExams);
       })
       .catch((error) => {
         console.error('Error fetching exam data:', error);
@@ -88,7 +87,7 @@ export default function AdminPage() {
                       <td>{user.id}</td>
                       <td>{user.nameAccount}</td>
                       <td>{user.status === 1 ? 'On' : 'Off'}</td>
-                      <td>{user.result?.length || 0}</td> {/* Use optional chaining and default value */}
+                      <td>{user.result?.length || 0}</td>
                     </tr>
                   ))}
                 </tbody>
@@ -102,16 +101,16 @@ export default function AdminPage() {
                 <thead>
                   <tr>
                     <th>#</th>
-                    <th>Môn</th>
+                    <th>Lượt thi</th>
                     <th>Tiêu đề</th>
                     <th>Độ khó</th>
                   </tr>
                 </thead>
                 <tbody>
-                  {exams.slice(0, 4).map((exam, index) => (
+                  {exams.map((exam, index) => (
                     <tr key={index}>
                       <td>{index + 1}</td>
-                      <td>{exam.subject}</td>
+                      <td>{exam.sequence}</td>
                       <td>{exam.name}</td>
                       <td>{exam.level}</td>
                     </tr>

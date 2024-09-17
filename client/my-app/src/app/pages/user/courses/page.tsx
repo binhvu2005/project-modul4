@@ -73,7 +73,7 @@ export default function Page() {
         </div>
         
         {/* Pagination */}
-        <div className="pagination">
+        <div className="pagination" >
           <button onClick={handlePreviousPage} disabled={currentPage === 1} className="pagination-button">
             Previous
           </button>

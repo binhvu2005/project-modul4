@@ -4,7 +4,7 @@ import React, { useState, useEffect, ChangeEvent } from 'react';
 import axios from 'axios';
 import { useRouter } from 'next/navigation';
 import '@/app/styles/home.css'; // Update with your actual CSS file path
-
+import Swal from 'sweetalert2';
 interface User {
   id: string;
   nameAccount: string;
@@ -62,15 +62,30 @@ export default function Page() {
   }, []);
 
   const handleLogout = () => {
-    localStorage.removeItem("keyLogin");
-    router.push('/pages/user/sign-in');
-    setLogin(false);
-    setUser(null);
+    Swal.fire({
+      title: 'Bạn có chắc muốn đăng xuất?',
+      text: 'Bạn sẽ cần phải đăng nhập lại để sử dụng các chức năng khác.',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Đăng xuất',
+      cancelButtonText: 'Hủy bỏ'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        // Thực hiện đăng xuất nếu người dùng xác nhận
+        localStorage.removeItem("keyLogin");
+        router.push('/pages/user/sign-in');
+        setLogin(false);
+        setUser(null);
+
+        Swal.fire('Đã đăng xuất!', '', 'success');
+      }
+    });
+   
   };
 
   const handleSearch = (event: ChangeEvent<HTMLInputElement>) => {
     const query = event.target.value;
-    setSearchQuery(query); // Lưu giá trị tìm kiếm vào state
+    setSearchQuery(query); 
     const filter = query.toUpperCase();
     const filtered = examList.filter((exam) =>
       exam.name.toUpperCase().includes(filter)
@@ -104,7 +119,7 @@ export default function Page() {
             {filteredExams.length > 0 ? (
               filteredExams.map((exam) => (
                 <li key={exam.id} className="search-results">
-                  <Link href={`/pages/Products.html?id=${exam.id}`}>
+                  <Link href={`/pages/user/exam/${exam.id}`}>
                     {exam.name}
                   </Link>
                 </li>

@@ -1148,6 +1148,7 @@ a {
 .logout-btn {
   padding: 8px 16px;
   border-radius: 25px;
+  border: 0;
   background-color: #f8e796;
   cursor: pointer;
   font-size: 15px;
@@ -1157,7 +1158,7 @@ a {
 }
 
 .logout-btn:hover {
-  background-color: #e04350;
+  background-color: #ebcd28;
   transform: translateY(-2px);
   box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.2);
 }
@@ -1218,4 +1219,98 @@ a {
   text-decoration: none;
   color: inherit;
   display: block;
+}
+
+/* Định dạng chung cho phần container của đề thi */
+.attend-exam {
+  padding: 40px 0;
+  background-color: #f9f9f9;
+}
+
+.attend-exam h1 {
+  font-size: 2rem;
+  font-weight: bold;
+  margin-bottom: 40px;
+  color: #333;
+}
+
+/* Định dạng danh sách đề thi */
+.attend-list {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+/* Định dạng từng thẻ card */
+.card {
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  text-align: center;
+  cursor: pointer;
+}
+
+.card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+/* Định dạng hình ảnh */
+.card img {
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+  width: 100%;
+  object-fit: cover;
+}
+
+/* Định dạng nội dung card */
+.card-body {
+  padding: 15px;
+}
+
+.card h4 {
+  font-size: 1.25rem;
+  color: #e04350;
+  margin-bottom: 10px;
+}
+
+.card h5 {
+  font-size: 1rem;
+  color: #28a745;
+  margin-bottom: 8px;
+}
+
+#sequence {
+  font-size: 0.9rem;
+  color: #555;
+  display: block;
+  margin-top: 5px;
+}
+
+/* Responsive - Điều chỉnh layout cho màn hình nhỏ */
+@media (max-width: 768px) {
+  .attend-list {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .card {
+    width: 90%;
+  }
+}
+/* Loại bỏ gạch chân cho tất cả các thẻ <a> */
+a {
+  text-decoration: none;
+}
+
+/* Đảm bảo các link trong thẻ card không bị gạch chân */
+.attend-list a {
+  text-decoration: none;
+  color: inherit; /* Giữ nguyên màu sắc của thẻ cha */
+}
+.header-nav a {
+  text-decoration: none;
+  color: inherit; /* Giữ nguyên màu sắc của thẻ cha */
 }

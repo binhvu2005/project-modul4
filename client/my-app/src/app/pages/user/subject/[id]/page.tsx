@@ -113,7 +113,7 @@ export default function Page({ params }: { params: { id: string } }) {
 
   return (
     <div>
-      <Header />
+      <Header /> <br /><br /> <br /><br />
       <main className="main">
         <section className="course-header">
           {course && (

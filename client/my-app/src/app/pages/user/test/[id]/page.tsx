@@ -26,7 +26,7 @@ export default function Page({ params }: { params: { id: string } }) {
         try {
           const response = await axios.get("http://localhost:5000/userList");
           const users = response.data;
-          const currentUser = users.find((user: any) => user.id === idUserLogin);
+          const currentUser = users.find((user: any) => user.id == idUserLogin);
           if (currentUser) {
             setUser(currentUser);
             setLogin(true);
@@ -65,6 +65,8 @@ export default function Page({ params }: { params: { id: string } }) {
       try {
         const response = await axios.get("http://localhost:5000/question");
         const questions = response.data.filter((question: any) => question.idExam == idExam);
+        console.log(questions);
+        
         const shuffled = shuffleArray(questions);
         setShuffledQuestions(shuffled);
       } catch (error) {
