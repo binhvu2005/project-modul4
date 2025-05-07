@@ -45,6 +45,7 @@ interface ExamHistory {
 }
 
 const Profile: React.FC = () => {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [yourProfile, setYourProfile] = useState<Account | null>(null);
   const [examHistory, setExamHistory] = useState<ExamHistory[]>([]);
   const [examList, setExamList] = useState<Exam[]>([]);

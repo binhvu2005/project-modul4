@@ -9,6 +9,13 @@ import "@/app/styles/login.css"
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '@fortawesome/fontawesome-free/css/all.min.css';
 import Link from 'next/link';
+interface User {
+  email: string;
+  password: string;
+  lock: string;
+  id: string;
+  // Add other properties if needed
+}
 
 const Login: React.FC = () => {
   const [email, setEmail] = useState('');
@@ -29,7 +36,7 @@ const Login: React.FC = () => {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    let formErrors: { [key: string]: string } = {};
+    const formErrors: { [key: string]: string } = {};
     if (!email) formErrors.email = 'Email không được để trống';
     if (!password) formErrors.password = 'Mật khẩu không được để trống';
 
@@ -43,8 +50,9 @@ const Login: React.FC = () => {
       const users = response.data;
 
       const currentUser = users.find(
-        (user: any) => user.email === email
+        (user: User) => user.email === email
       );
+      
 
       if (currentUser) {
         // Decrypt the password from the database

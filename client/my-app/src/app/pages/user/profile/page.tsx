@@ -39,6 +39,7 @@ interface Account {
 const Profile: React.FC = () => {
   const [yourProfile, setYourProfile] = useState<Account | null>(null);
 
+
   // Fetch user data from the backend based on keyLogin
   useEffect(() => {
     const fetchUser = async () => {
@@ -115,7 +116,7 @@ const Profile: React.FC = () => {
       },
     }).then((result) => {
       if (result.isConfirmed && yourProfile) {
-        saveAccountToBackend(result.value);
+        saveAccountToBackend(yourProfile);
         Swal.fire(
           "Thành công!",
           "Thông tin cá nhân đã được cập nhật.",
@@ -175,8 +176,8 @@ const Profile: React.FC = () => {
       if (result.isConfirmed) {
         if (yourProfile) {
           const updatedProfile = { ...yourProfile, password: result.value };
-          setYourProfile(updatedProfile);
-          saveAccountToBackend(updatedProfile);
+            setYourProfile(updatedProfile as Account);
+            saveAccountToBackend(updatedProfile as Account);
           Swal.fire("Thành công!", "Mật khẩu đã được đổi.", "success");
         }
       }

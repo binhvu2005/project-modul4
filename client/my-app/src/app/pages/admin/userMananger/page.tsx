@@ -4,7 +4,7 @@ import axios from 'axios';
 import Swal from 'sweetalert2';
 import { IonIcon } from '@ionic/react';
 import { lockClosedOutline, lockOpenOutline, eyeOutline } from 'ionicons/icons';
-import Header from '@/app/compoments/admin/header/page';
+import Header from '@/app/components/admin/header/page';
 import Navbar from '@/app/compoments/admin/navbar/page';
 import "../../../styles/adminAccs.css";
 import '../../../styles/adminHome.css'; // Adjust the path according to your project structure
@@ -40,7 +40,7 @@ export default function AccountManagementPage() {
   }, [searchTerm, accounts]);
 
   useEffect(() => {
-    let sorted = [...filteredAccounts];
+    const sorted = [...filteredAccounts];
 
     if (sortOptionId === 'smallBig') {
       sorted.sort((a, b) => a.id - b.id);
@@ -88,7 +88,7 @@ export default function AccountManagementPage() {
             ...account,
             lock: account.lock === 'open' ? 'lock' : 'open'
           })
-          .then(response => {
+          .then(() => {
             // Update the local state only if the API call is successful
             const updatedAccounts = accounts.map(acc =>
               acc.id === id ? { ...acc, lock: acc.lock === 'open' ? 'lock' : 'open' } : acc

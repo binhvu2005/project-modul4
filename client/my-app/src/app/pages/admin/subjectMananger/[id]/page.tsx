@@ -119,7 +119,7 @@ export default function Page({ params }: { params: { id: string } }) {
       }
     }).then((result) => {
       if (result.isConfirmed) {
-        const { subjectName, subjectImageFile } = result.value;
+        const { subjectName, subjectImageFile } = result.value || {};
 
         if (subjectImageFile) {
           const storageRef = ref(storage, `subjects/${subjectImageFile.name}`);
@@ -170,7 +170,7 @@ export default function Page({ params }: { params: { id: string } }) {
       }
     }).then((result) => {
       if (result.isConfirmed) {
-        const { newSubjectName, newSubjectImageFile } = result.value;
+        const { newSubjectName, newSubjectImageFile } = result.value|| {};
 
         if (newSubjectImageFile) {
           const storageRef = ref(storage, `subjects/${newSubjectImageFile.name}`);

@@ -10,8 +10,16 @@ import {
   faBlog,
   faCircleQuestion,
   faHandshake,
+  faHeart,
 } from "@fortawesome/free-solid-svg-icons";
-import "@/app/styles/home.css"
+import {
+  faFacebook,
+  faTwitter,
+  faGithub,
+  faInstagram,
+} from "@fortawesome/free-brands-svg-icons";
+import "@/app/styles/home.css";
+
 export default function Page() {
   return (
     <div>
@@ -37,10 +45,10 @@ export default function Page() {
               tập và theo dõi quá trình học tập.
             </p>
             <div className="flogo-list">
-              <FontAwesomeIcon icon={["fab", "facebook"]} />
-              <FontAwesomeIcon icon={["fab", "twitter"]} />
-              <FontAwesomeIcon icon={["fab", "github"]} />
-              <FontAwesomeIcon icon={["fab", "instagram"]} />
+              <FontAwesomeIcon icon={faFacebook} />
+              <FontAwesomeIcon icon={faTwitter} />
+              <FontAwesomeIcon icon={faGithub} />
+              <FontAwesomeIcon icon={faInstagram} />
             </div>
           </div>
           <div className="footer-right">
@@ -75,8 +83,7 @@ export default function Page() {
                 </tr>
                 <tr className="ftable-items">
                   <td className="ftable-item">
-                    <FontAwesomeIcon icon={faShop}  width={20} height={20} />{" "}
-                    Group 3 Mall
+                    <FontAwesomeIcon icon={faShop} width={20} height={20} /> Group 3 Mall
                   </td>
                   <td className="ftable-item">
                     <FontAwesomeIcon icon={faTruckFast} width={20} height={20} /> Dịch vụ
@@ -92,9 +99,9 @@ export default function Page() {
         <hr />
         <div className="end">
           <div className="end-left">
-            <span>@ 2024 OnlineTest. Created with</span>
-            <FontAwesomeIcon icon="heart" style={{ color: "red" }} />
-            <span>by binh vu</span>
+            <span>@ 2024 OnlineTest. Created with </span>
+            <FontAwesomeIcon icon={faHeart} style={{ color: "red" }} />
+            <span> by binh vu</span>
           </div>
           <div className="end-right">
             <span>Trao tri thức - Nhận niềm tin!</span>

@@ -123,9 +123,9 @@ export default function ExamPage({ params }: { params: { id: string } }) {
         return { name, level, image, describe };
       },
     }).then((result) => {
-      if (result.isConfirmed) {
+      if (result.isConfirmed && result.value) {
         const newExam = {
-          name: result.value.name,
+          name: result.value.name || "",
           level: result.value.level,
           sequence: 0, // Default value, adjust as needed
           idSubject: Number(courseId), // Ensure courseId is a number
@@ -170,7 +170,7 @@ export default function ExamPage({ params }: { params: { id: string } }) {
         return { name, level, image, describe };
       },
     }).then((result) => {
-      if (result.isConfirmed) {
+      if (result.isConfirmed && result.value) {
         axios
           .put(`http://localhost:5000/examList/${exam.id}`, {
             ...exam,
