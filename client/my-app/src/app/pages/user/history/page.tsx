@@ -45,7 +45,6 @@ interface ExamHistory {
 }
 
 const Profile: React.FC = () => {
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [yourProfile, setYourProfile] = useState<Account | null>(null);
   const [examHistory, setExamHistory] = useState<ExamHistory[]>([]);
   const [examList, setExamList] = useState<Exam[]>([]);
@@ -53,21 +52,18 @@ const Profile: React.FC = () => {
   const [itemsPerPage] = useState(5);
   const [sortOption, setSortOption] = useState<{ type: string; order: string }>({ type: "date", order: "asc" });
 
-  const idUserLogin = localStorage.getItem("keyLogin");
+  const idUserLogin = typeof window !== "undefined" ? localStorage.getItem("keyLogin") : null;
 
   useEffect(() => {
     const fetchData = async () => {
       if (idUserLogin) {
         try {
-          // Fetch user profile
           const userResponse = await axios.get(`http://localhost:5000/userList/${idUserLogin}`);
           setYourProfile(userResponse.data);
 
-          // Fetch exam history
           const historyResponse = await axios.get(`http://localhost:5000/userAnswer?userId=${idUserLogin}`);
           setExamHistory(historyResponse.data);
 
-          // Fetch exam list
           const examResponse = await axios.get<Exam[]>("http://localhost:5000/examList");
           setExamList(examResponse.data);
         } catch (err) {
@@ -90,11 +86,19 @@ const Profile: React.FC = () => {
     return 0;
   });
 
+  const filteredHistory = sortedHistory.filter((history) => history.idUser === idUserLogin);
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
-  const currentItems = sortedHistory.slice(indexOfFirstItem, indexOfLastItem);
+  const currentItems = filteredHistory.slice(indexOfFirstItem, indexOfLastItem);
+  const totalPages = Math.ceil(filteredHistory.length / itemsPerPage);
 
-  const pageNumbers = Array.from({ length: Math.ceil(sortedHistory.length / itemsPerPage) }, (_, i) => i + 1);
+  const pageNumbers = Array.from({ length: totalPages }, (_, i) => i + 1);
+
+  const handlePageChange = (page: number) => {
+    if (page >= 1 && page <= totalPages) {
+      setCurrentPage(page);
+    }
+  };
 
   return (
     <>
@@ -132,8 +136,8 @@ const Profile: React.FC = () => {
                   onChange={(e) => setSortOption({ type: "score", order: e.target.value })}
                   style={{ padding: "6px 16px", backgroundColor: "lightgrey", borderRadius: 6 }}
                 >
-                  <option value="asc">Cao - Thấp</option>
-                  <option value="desc">Thấp - Cao</option>
+                  <option value="desc">Cao - Thấp</option>
+                  <option value="asc">Thấp - Cao</option>
                 </select>
               </div>
               <table className="tablex">
@@ -147,29 +151,44 @@ const Profile: React.FC = () => {
                   </tr>
                 </thead>
                 <tbody>
-  {currentItems
-    .filter((history) => history.idUser === idUserLogin) // Filter items based on user ID
-    .map((history) => {
-      const exam = examList.find((e) => e.id === history.idExam);
-      return (
-        <tr key={history.id}>
-          <td>{history.idExam}</td>
-          <td><Link href={`/pages/user/result/${history.id}`}>{exam ? exam.name : "Loading..."}</Link></td>
-          <td>{history.score}</td>
-          <td>{history.time}</td>
-          <td>{new Date(history.date).toLocaleDateString()}</td>
-        </tr>
-      );
-    })}
-</tbody>
-
+                  {currentItems.map((history) => {
+                    const exam = examList.find((e) => e.id === history.idExam);
+                    return (
+                      <tr key={history.id}>
+                        <td>{history.idExam}</td>
+                        <td><Link href={`/pages/user/result/${history.id}`}>{exam ? exam.name : "Loading..."}</Link></td>
+                        <td>{history.score}</td>
+                        <td>{history.time}</td>
+                        <td>{new Date(history.date).toLocaleDateString()}</td>
+                      </tr>
+                    );
+                  })}
+                </tbody>
               </table>
               <div className="pagination">
+                <button
+                  onClick={() => handlePageChange(currentPage - 1)}
+                  disabled={currentPage === 1}
+                  className="page-number"
+                >
+                  Trang trước
+                </button>
                 {pageNumbers.map((number) => (
-                  <button key={number} onClick={() => setCurrentPage(number)}>
+                  <button
+                    key={number}
+                    onClick={() => handlePageChange(number)}
+                    className={`page-number ${currentPage === number ? "active" : ""}`}
+                  >
                     {number}
                   </button>
                 ))}
+                <button
+                  onClick={() => handlePageChange(currentPage + 1)}
+                  disabled={currentPage === totalPages}
+                  className="page-number"
+                >
+                  Trang sau
+                </button>
               </div>
             </>
           )}

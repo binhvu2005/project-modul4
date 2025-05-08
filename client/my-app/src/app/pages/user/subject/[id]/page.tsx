@@ -7,7 +7,7 @@ import { IonIcon } from "@ionic/react";
 import { chevronBackOutline, chevronForwardOutline } from "ionicons/icons";
 import "@/app/styles/Subjects.css";
 import Link from "next/link";
-
+import { useParams } from "next/navigation";
 interface Course {
   id: string;
   title: string;
@@ -31,7 +31,7 @@ interface Exam {
   image: string;
 }
 
-export default function Page({ params }: { params: { id: string } }) {
+export default function Page() {
   const [course, setCourse] = useState<Course | null>(null);
   const [subjects, setSubjects] = useState<Subject[]>([]);
   const [exams, setExams] = useState<Exam[]>([]);
@@ -39,7 +39,9 @@ export default function Page({ params }: { params: { id: string } }) {
   const [selectedLevel, setSelectedLevel] = useState<number | null>(null);
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
-  const courseId = parseInt(params.id, 10);
+  const params = useParams();
+  const courseId = params.id as string; // Get the course ID from the URL
+
 
   const examsPerPage = 2; // Number of exams per page
 
@@ -47,7 +49,7 @@ export default function Page({ params }: { params: { id: string } }) {
     const fetchCourse = async () => {
       try {
         const response = await axios.get<Course[]>("http://localhost:5000/courses");
-        const foundCourse = response.data.find(c => parseInt(c.id, 10) === courseId);
+        const foundCourse = response.data.find(c => c.id === courseId);
         setCourse(foundCourse || null);
       } catch (error) {
         console.error("Error fetching course:", error);
@@ -61,7 +63,7 @@ export default function Page({ params }: { params: { id: string } }) {
     const fetchSubjects = async () => {
       try {
         const response = await axios.get<Subject[]>("http://localhost:5000/subjectList");
-        const filteredSubjects = response.data.filter(subject => subject.idCourese === courseId);
+        const filteredSubjects = response.data.filter(subject => subject.idCourese === parseInt(courseId, 10));
         setSubjects(filteredSubjects);
       } catch (error) {
         console.error("Error fetching subjects:", error);

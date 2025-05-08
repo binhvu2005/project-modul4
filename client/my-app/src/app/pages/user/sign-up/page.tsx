@@ -70,7 +70,7 @@ const SignUp: React.FC = () => {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    let formErrors: { [key: string]: string } = {};
+    const formErrors: { [key: string]: string } = {};
 
     // Validate Name
     if (!nameAccount) formErrors.nameAccount = 'Tên không được để trống';
@@ -132,12 +132,12 @@ const SignUp: React.FC = () => {
   };
 
   return (
-    <section className="h-80 bg-dark">
+    <section className="h-100 bg-dark">
       <form id="signup" onSubmit={handleSubmit}>
-        <div className="container py-5 h-100">
+        <div className="container py-5 h-200">
           <div className="row d-flex justify-content-center align-items-center h-100">
-            <div className="col">
-              <div className="card card-registration my-4">
+            <div className="coL" >
+              <div className="card card-registration my-4"style={{ maxHeight: "750px" }}>
                 <div className="row g-0">
                   <div className="col-xl-6 d-none d-xl-block">
                     <img

@@ -20,7 +20,7 @@ export default function page() {
         <p>cao hơn.</p>
       </div>
       <div className="baner-mid-4">
-        <a href="Subjects.html">
+        <a href="/pages/user/courses">
           <button className="baner-mid-3">Thi Ngay</button>
         </a>
         <div className="baner-bottom" />

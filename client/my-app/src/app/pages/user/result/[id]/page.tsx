@@ -4,7 +4,7 @@ import Header from "@/app/compoments/user/header/page";
 import Footer from "@/app/compoments/user/footer/page";
 import "@/app/styles/test-result.css";
 import axios from 'axios';
-
+import { useParams } from 'next/navigation';
 export interface UserAnswer {
   id: number;
   idExam: string;
@@ -42,8 +42,9 @@ export interface Question {
   explanation?: string; 
 }
 
-export default function Page({ params }: { params: { id: string } }) {
-  const idTest = +params.id;
+export default function Page() {
+  const params = useParams();
+    const idTest = params.id as string;
   const [result, setResult] = useState<UserAnswer | null>(null);
   const [exam, setExam] = useState<Exam | null>(null);
   const [questions, setQuestions] = useState<Question[]>([]);
@@ -55,7 +56,7 @@ export default function Page({ params }: { params: { id: string } }) {
     const fetchResult = async () => {
       try {
         const response = await axios.get<UserAnswer[]>("http://localhost:5000/userAnswer");
-        const resultData = response.data.find((r) => r.id == idTest);
+        const resultData = response.data.find((r) => r.id === Number(idTest));
         setResult(resultData || null);
       } catch (error) {
         console.error("Error fetching result:", error);

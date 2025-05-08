@@ -1,7 +1,13 @@
+// next.config.js
 module.exports = {
-    webpack: (config, { isServer }) => {
-      config.cache = false;
-      return config;
-    },
-  };
-  
+  rules: {
+    '@typescript-eslint/no-explicit-any': 'off',
+  },
+  webpack: (config) => {
+    config.cache = false;
+    return config;
+  },
+  experimental: {
+    appDir: true,
+  },
+};

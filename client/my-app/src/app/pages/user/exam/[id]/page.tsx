@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
@@ -8,7 +9,8 @@ import ReactPaginate from 'react-paginate';
 import Link from 'next/link';
 import Swal from 'sweetalert2';
 
-export default function Page({ params }: { params: { id: string } }) {
+import { useParams } from 'next/navigation';
+export default function Page() {
   const [exam, setExam] = useState<any>(null);
   const [referenceExams, setReferenceExams] = useState<any[]>([]);
   const [comments, setComments] = useState<any[]>([]);
@@ -18,6 +20,7 @@ export default function Page({ params }: { params: { id: string } }) {
   const [newComment, setNewComment] = useState('');
   const [editingCommentId, setEditingCommentId] = useState<string | null>(null);
   const [showAllComments, setShowAllComments] = useState(false);
+  const params = useParams();
 
   useEffect(() => {
     async function fetchData() {
@@ -26,6 +29,7 @@ export default function Page({ params }: { params: { id: string } }) {
         const examResponse = await axios.get('http://localhost:5000/examList');
         const exams = examResponse.data;
         const currentExam = exams.find((exam: any) => exam.id === params.id);
+       
         const referenceExams = exams.filter((exam: any) => exam.id !== params.id && exam.idSubject === currentExam.idSubject);
 
         // Fetch comments data
