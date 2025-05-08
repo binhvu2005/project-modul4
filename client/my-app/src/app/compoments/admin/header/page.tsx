@@ -1,17 +1,23 @@
-"use client"
+"use client";
 import { SignOutButton, useAuth, UserButton } from '@clerk/nextjs';
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 
 export default function Page() {
-  const { isSignedIn } = useAuth();
-  console.log(isSignedIn);
-
+  const { isSignedIn, isLoaded } = useAuth(); // đảm bảo auth đã load
   const router = useRouter();
-  function check() {
-    if (!isSignedIn) {
+
+  useEffect(() => {
+    if (isLoaded && !isSignedIn) {
       router.push("/pages/admin/sign-in");
-    } else {
+    }
+  }, [isSignedIn, isLoaded, router]);
+
+  // Nếu chưa load xong trạng thái auth, return null hoặc loading
+  if (!isLoaded) return null;
+
+  if (!isSignedIn) return null; // hoặc loading...
+
   return (
     <div>
       <header className="header-admin">
@@ -27,13 +33,12 @@ export default function Page() {
           </div>
         </div>
         <div className="header-icons">
-        <SignOutButton>
-          <button>Sign out</button>
-        </SignOutButton>
+          <SignOutButton>
+            <button>Sign out</button>
+          </SignOutButton>
           <UserButton />
         </div>
       </header>
     </div>
-  );}}
-  return <div>{check()}</div>;
+  );
 }

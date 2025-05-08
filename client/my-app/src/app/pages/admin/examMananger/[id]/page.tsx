@@ -7,6 +7,7 @@ import axios from "axios";
 import { useRouter } from "next/navigation";
 import "../../../../styles/adminExam.css";
 
+import { useParams } from "next/navigation";
 interface Exam {
   id: string;
   name: string;
@@ -17,12 +18,12 @@ interface Exam {
   describe: string;
 }
 
-export default function ExamPage({ params }: { params: { id: string } }) {
+export default function ExamPage() {
   const [exams, setExams] = useState<Exam[]>([]);
   const [filteredExams, setFilteredExams] = useState<Exam[]>([]);
   const [searchTerm, setSearchTerm] = useState<string>("");
-
-  const courseId = params.id;
+  const params = useParams();
+  const courseId = params.id as string; 
   const router = useRouter();
 
   useEffect(() => {

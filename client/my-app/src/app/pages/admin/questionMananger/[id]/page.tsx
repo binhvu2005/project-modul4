@@ -7,6 +7,7 @@ import axios from "axios";
 import { useRouter } from "next/navigation";
 import "../../../../styles/adminExam.css";
 
+import { useParams } from "next/navigation";
 interface Answer {
   answer: string;
   status: number;
@@ -20,14 +21,14 @@ interface Question {
   id: string;
 }
 
-export default function QuestionPage({ params }: { params: { id: string } }) {
+export default function QuestionPage() {
   const [questions, setQuestions] = useState<Question[]>([]);
   const [filteredQuestions, setFilteredQuestions] = useState<Question[]>([]);
   const [searchTerm, setSearchTerm] = useState<string>("");
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [questionsPerPage] = useState<number>(5); // Number of questions per page
-
-  const examId = Number(params.id);
+  const params = useParams();
+  const examId = params.id as string;
   const router = useRouter();
 
   useEffect(() => {
@@ -41,7 +42,7 @@ export default function QuestionPage({ params }: { params: { id: string } }) {
       if (!response.ok) throw new Error("Failed to fetch questions");
       const data = await response.json();
       setQuestions(data);
-      filterQuestions(data, examId);
+      filterQuestions(data, Number(examId));
     } catch (error) {
       console.error("Error fetching questions:", error);
       Swal.fire("Lỗi!", "Không thể tải danh sách câu hỏi. Vui lòng thử lại sau.", "error");
@@ -58,7 +59,7 @@ export default function QuestionPage({ params }: { params: { id: string } }) {
   const handleSearch = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSearchTerm(event.target.value);
     if (event.target.value === "") {
-      filterQuestions(questions, examId);
+      filterQuestions(questions, Number(examId));
     } else {
       const searchedQuestions = questions.filter((question) =>
         question.questionName.toLowerCase().includes(event.target.value.toLowerCase())

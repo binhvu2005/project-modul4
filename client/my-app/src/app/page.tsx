@@ -1,9 +1,13 @@
-import React from 'react'
+'use client';
+import React, { useEffect } from 'react';
+import { useRouter } from 'next/navigation';
 
-export default function page() {
-  return (
-    <div>
-      123123
-    </div>
-  )
+export default function Page() {
+  const router = useRouter();
+
+  useEffect(() => {
+    router.push('/pages/user/home');
+  }, [router]);
+
+  return <div>Đang chuyển hướng...</div>;
 }

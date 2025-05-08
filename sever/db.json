@@ -1146,25 +1146,7 @@
     }
   ],
   "userList": [
-    {
-      "img": "https://www.w3schools.com/howto/img_avatar.png",
-      "id": "12345",
-      "nameAccount": "Admin",
-      "email": "admin@gmail.com",
-      "phone": "0000000000",
-      "address": "Hà Nội",
-      "password": "admin1",
-      "status": 0,
-      "result": [
-        {
-          "idExem": 0,
-          "score": 0,
-          "time": 0,
-          "date": 0
-        }
-      ],
-      "lock": "open"
-    },
+
     {
       "img": "https://i.pinimg.com/originals/c2/7b/ed/c27bede28d95632b9fc4be05bb3576b1.jpg",
       "id": "67890",

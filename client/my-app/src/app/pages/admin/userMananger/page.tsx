@@ -4,10 +4,11 @@ import axios from 'axios';
 import Swal from 'sweetalert2';
 import { IonIcon } from '@ionic/react';
 import { lockClosedOutline, lockOpenOutline, eyeOutline } from 'ionicons/icons';
-import Header from '@/app/components/admin/header/page';
+import Header from '@/app/compoments/admin/header/page';
 import Navbar from '@/app/compoments/admin/navbar/page';
 import "../../../styles/adminAccs.css";
 import '../../../styles/adminHome.css'; // Adjust the path according to your project structure
+
 
 interface Account {
   id: number;
